@@ -1,6 +1,7 @@
 package com.project.doday.controller;
 
 import com.project.doday.domain.Solution;
+import com.project.doday.dto.ReportFindAllRes;
 import com.project.doday.dto.SolutionRejectReq;
 import com.project.doday.dto.SolutionReq;
 import com.project.doday.repository.AdminRepository;
@@ -8,10 +9,9 @@ import com.project.doday.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequiredArgsConstructor
