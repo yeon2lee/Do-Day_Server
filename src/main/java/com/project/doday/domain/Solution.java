@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter @Setter
 @Builder
@@ -31,5 +33,7 @@ public class Solution extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private SolutionState state;
+
+    private LocalDateTime reportDate;
 
 }

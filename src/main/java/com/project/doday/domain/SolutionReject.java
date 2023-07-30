@@ -12,9 +12,9 @@ public class SolutionReject {
     @Id @GeneratedValue
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "admin_id")
-    private Admin admin;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "admin_id")
+//    private Admin admin;
 
     private String content;
 }
