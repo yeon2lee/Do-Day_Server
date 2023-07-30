@@ -17,10 +17,10 @@ public class MemberController {
     /**
      * 나의 해결 목록 보기
      */
-    @GetMapping("/mypage/solution/{memberId}")
-    public List<SolutionListRes> getSolutionList(@PathVariable Long memberId) {
-        List<SolutionListRes> solutionList = memberService.getMySolution(memberId);
-        return solutionList;
-    }
+//    @GetMapping("/mypage/solution/{memberId}")
+//    public List<SolutionListRes> getSolutionList(@PathVariable Long memberId) {
+//        List<SolutionListRes> solutionList = memberService.getMySolution(memberId);
+//        return solutionList;
+//    }
 
 }
