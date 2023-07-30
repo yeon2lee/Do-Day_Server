@@ -10,18 +10,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Admin {
     @Id @GeneratedValue
     private Long id;
 
     private String userId;
     private String password;
-
-    private Long nowReward;
-    private Long totalReward;
-
-    public void covertReward(Long amount) {
-        nowReward -= amount;
-    }
-
 }
