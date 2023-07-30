@@ -1,6 +1,7 @@
 package com.project.doday.service;
 
 import com.project.doday.domain.*;
+import com.project.doday.dto.ReportDetailRes;
 import com.project.doday.dto.ReportFindAllRes;
 import com.project.doday.dto.ReportReq;
 import com.project.doday.repository.MemberRepository;
@@ -26,12 +27,6 @@ public class ReportService {
     public Long createReport(ReportReq reportReq) {
         Member member = memberRepository.findById(reportReq.getMemberId()).get();
 
-
-        // TODO solution의 reportDate를 Report를 생성한 날짜로 설정
-        //save.setReportDate(report.getCreatedDate());
-//        save.setState(SolutionState.RESOLVING);
-        // TODO: report의 state를 해결 중으로 바꾸기
-
         Report createReport = Report.builder()
                 .member(member)
                 .latitude(reportReq.getLatitude())
@@ -55,14 +50,27 @@ public class ReportService {
 
     }
 
+    /**
+     * 신고 목록 보기
+     */
     public ArrayList<ReportFindAllRes> findAllReport(){
         ArrayList<ReportFindAllRes> findResult = new ArrayList<ReportFindAllRes>();
 
         ArrayList<Report> reports = reportRepository.findAllByStateOrderByCreatedDateDesc(ReportState.UNRESOLVED);
 
         for(Report report: reports) {
-            findResult.add(new ReportFindAllRes(report.getLocation(), report.getPhotoRaincatch(), report.getCreatedDate()));
+            findResult.add(new ReportFindAllRes(report.getId(), report.getLocation(), report.getPhotoRaincatch(), report.getCreatedDate()));
         }
         return findResult;
+    }
+
+    /**
+     * 신고 상세 보기
+     */
+    public ReportDetailRes getReport(Long reportId) {
+        Report report = reportRepository.findById(reportId).get();
+        ReportDetailRes reportDetailRes = new ReportDetailRes(reportId, report.getLatitude(), report.getLongitude(),
+                report.getLocation(), report.getPhotoRaincatch(), report.getPhotoAround(), report.getDescription());
+        return reportDetailRes;
     }
 }
