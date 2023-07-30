@@ -61,7 +61,7 @@ public class ReportService {
         ArrayList<Report> reports = reportRepository.findAllByStateOrderByCreatedDateDesc(ReportState.UNRESOLVED);
 
         for(Report report: reports) {
-            findResult.add(new ReportFindAllRes(report.getLocation(), report.getPhotoRaincatch(), report.getCreatedDate()));
+            findResult.add(new ReportFindAllRes(report.getId(), report.getLocation(), report.getPhotoRaincatch(), report.getCreatedDate()));
         }
         return findResult;
     }

@@ -40,4 +40,8 @@ public class ReportController {
         return new ResponseEntity(allReport, HttpStatus.OK);
     }
 
+    /**
+     * 신고 상세보기
+     */
+
 }

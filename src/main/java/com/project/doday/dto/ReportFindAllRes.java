@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 public class ReportFindAllRes {
+    private Long reportId;
     private String location;
     private String photoRaincatch;
     private LocalDateTime createDate;
