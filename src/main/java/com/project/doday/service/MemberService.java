@@ -1,13 +1,11 @@
 package com.project.doday.service;
 
-
 import com.project.doday.domain.Solution;
 import com.project.doday.dto.SolutionListRes;
 import com.project.doday.repository.SolutionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,14 +23,15 @@ public class MemberService {
     @Transactional(readOnly = true)
     public List<SolutionListRes> getMySolution(Long memberId) {
         List<Solution> solutions = solutionRepository.findAll();
-        List<Solution> mySolution = new ArrayList<>();
+        List<SolutionListRes> mySolution = new ArrayList<>();
         for(Solution solution : solutions) {
             // TODO 반려 사유
             if(solution.getMember().getId() == memberId) {
                 SolutionListRes solutionRes = new SolutionListRes(
                         solution.getId(), solution.getReportDate(), solution.getLocation(),
                         solution.getPhoto(), "", solution.getState());
-                mySolution.add(solutionListRes);
+
+                mySolution.add(solutionRes);
             }
         }
 
