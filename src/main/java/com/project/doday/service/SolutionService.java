@@ -1,14 +1,12 @@
 package com.project.doday.service;
 
-import com.project.doday.domain.Member;
-import com.project.doday.domain.Report;
-import com.project.doday.domain.Solution;
-import com.project.doday.domain.SolutionState;
+import com.project.doday.domain.*;
 import com.project.doday.dto.SolutionDetailRes;
 import com.project.doday.dto.SolutionListRes;
 import com.project.doday.dto.SolutionReq;
 import com.project.doday.repository.MemberRepository;
 import com.project.doday.repository.ReportRepository;
+import com.project.doday.repository.SolutionRejectRepository;
 import com.project.doday.repository.SolutionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -25,6 +24,7 @@ public class SolutionService {
     private final SolutionRepository solutionRepository;
     private final MemberRepository memberRepository;
     private final ReportRepository reportRepository;
+    private final SolutionRejectRepository solutionRejectRepository;
 
     /**
      * 해결 신청하기
@@ -67,11 +67,18 @@ public class SolutionService {
         List<Solution> solutions = solutionRepository.findAll();
         List<SolutionListRes> solutionListRes = new ArrayList<>();
         for(Solution solution : solutions) {
-            // TODO 반려 사유
+            // 반려 내역 불러오기
+            Optional<SolutionReject> solutionReject = solutionRejectRepository.findById(solution.getId());
+            String content;
+            if (solutionReject.isPresent()) {
+                content = solutionReject.get().getContent();
+            } else {
+                content = "";
+            }
 
             SolutionListRes solutionRes = new SolutionListRes(
                     solution.getId(), solution.getReportDate(), solution.getLocation(),
-                    solution.getPhoto(), "", solution.getState());
+                    solution.getPhoto(), content, solution.getState());
 
             solutionListRes.add(solutionRes);
         }
@@ -84,7 +91,7 @@ public class SolutionService {
     public SolutionDetailRes getSolution(Long solutionId) {
         Solution solution = solutionRepository.findById(solutionId).get();
         SolutionDetailRes solutionDetailRes = new SolutionDetailRes(solutionId, solution.getLatitude(), solution.getLongitude(),
-                solution.getLocation(), solution.getPhoto(), "");
+                solution.getLocation(), solution.getPhoto(), solution.getFalseReport());
         return solutionDetailRes;
     }
 

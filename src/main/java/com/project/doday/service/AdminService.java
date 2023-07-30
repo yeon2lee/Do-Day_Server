@@ -1,14 +1,9 @@
 package com.project.doday.service;
 
-import com.project.doday.domain.Admin;
-import com.project.doday.domain.Member;
-import com.project.doday.domain.Solution;
-import com.project.doday.domain.SolutionState;
+import com.project.doday.domain.*;
+import com.project.doday.dto.SolutionRejectReq;
 import com.project.doday.dto.SolutionReq;
-import com.project.doday.repository.AdminRepository;
-import com.project.doday.repository.MemberRepository;
-import com.project.doday.repository.ReportRepository;
-import com.project.doday.repository.SolutionRepository;
+import com.project.doday.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +17,7 @@ public class AdminService {
 
     private final AdminRepository adminRepository;
     private final SolutionRepository solutionRepository;
+    private final SolutionRejectRepository solutionRejectRepository;
 
     /**
      * 해결한 신고 승인하기
@@ -35,11 +31,16 @@ public class AdminService {
     /**
      * 해결한 신고 반려하기
      */
-    public Solution rejectSolution(Long solutionId, Long adminId) {
+    public Solution rejectSolution(Long solutionId, Long adminId, SolutionRejectReq solutionRejectReq) {
         Solution solution = solutionRepository.findById(solutionId).get();
+        Admin admin = adminRepository.findById(adminId).get();
         solution.setState(SolutionState.REJECTED);
         // TODO report의 state를 해결완료(RESOLVED)에서 미해결(UNRESOLVED)로 변경
-        // TODO 반려 사유 추가
+
+        // 반려 내역 추가
+        SolutionReject solutionReject = new SolutionReject(solutionId, admin, solutionRejectReq.getContent());
+        solutionRejectRepository.save(solutionReject);
+
         return solution;
     }
 }
