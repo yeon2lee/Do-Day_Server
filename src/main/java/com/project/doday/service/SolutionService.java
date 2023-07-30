@@ -72,10 +72,11 @@ public class SolutionService {
             SolutionListRes solutionRes = new SolutionListRes(
                     solution.getId(), solution.getReportDate(), solution.getLocation(),
                     solution.getPhoto(), "", solution.getState());
+
+            solutionListRes.add(solutionRes);
         }
         return solutionListRes;
     }
-
 
     /**
      * 해결내역 상세보기
@@ -86,13 +87,5 @@ public class SolutionService {
                 solution.getLocation(), solution.getPhoto(), "");
         return solutionDetailRes;
     }
-    private Long solutionId;
-
-    private Double latitude;
-    private Double longitude;
-
-    private String location;
-    private String photo;
-    private String content;
 
 }
