@@ -16,7 +16,7 @@ public class SolutionListRes {
 
     private String location;
     private String photo;
-    private String content;
+    private String content; // 반려사유
 
     private SolutionState state;
 
