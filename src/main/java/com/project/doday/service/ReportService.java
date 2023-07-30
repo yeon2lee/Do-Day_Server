@@ -4,6 +4,7 @@ import com.project.doday.domain.*;
 import com.project.doday.dto.ReportDetailRes;
 import com.project.doday.dto.ReportFindAllRes;
 import com.project.doday.dto.ReportReq;
+import com.project.doday.repository.AdminRepository;
 import com.project.doday.repository.MemberRepository;
 import com.project.doday.repository.ReportRepository;
 import lombok.RequiredArgsConstructor;
@@ -51,7 +52,7 @@ public class ReportService {
     }
 
     /**
-     * 신고 목록 보기
+     * 신고 목록 보기 - 사용자
      */
     public ArrayList<ReportFindAllRes> findAllReport(){
         ArrayList<ReportFindAllRes> findResult = new ArrayList<ReportFindAllRes>();
@@ -63,6 +64,21 @@ public class ReportService {
         }
         return findResult;
     }
+
+    /**
+     * 전체 신고 목록 확인 - 관리자 (승인 전)
+     */
+    public ArrayList<ReportFindAllRes> findAdminReport(){
+        ArrayList<ReportFindAllRes> findAdminReport = new ArrayList<ReportFindAllRes>();
+
+        ArrayList<Report> reports = reportRepository.findAllByStateOrderByCreatedDateDesc(ReportState.UNAPPROVAL);
+
+        for(Report report: reports) {
+            findAdminReport.add(new ReportFindAllRes(report.getId(), report.getLocation(), report.getPhotoRaincatch(), report.getCreatedDate()));
+        }
+        return findAdminReport;
+    }
+
 
     /**
      * 신고 상세 보기

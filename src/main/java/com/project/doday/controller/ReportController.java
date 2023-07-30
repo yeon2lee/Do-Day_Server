@@ -31,12 +31,21 @@ public class ReportController {
 
 
     /**
-     * 신고 전체 목록 보기 - 미해결
+     * 신고 전체 목록 보기 - 사용자 (미해결)
      */
     @GetMapping("")
     public ArrayList<ReportFindAllRes> findAllReport(){
         ArrayList<ReportFindAllRes> allReport = reportService.findAllReport();
         return allReport;
+    }
+
+    /**
+     * 전체 신고 목록 확인 - 관리자 (승인 전)
+     */
+    @GetMapping("/admin")
+    public ArrayList<ReportFindAllRes> findAdminReport(){
+        ArrayList<ReportFindAllRes> adminAllReport = reportService.findAdminReport();
+        return adminAllReport;
     }
 
     /**

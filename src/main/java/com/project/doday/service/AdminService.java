@@ -1,6 +1,7 @@
 package com.project.doday.service;
 
 import com.project.doday.domain.*;
+import com.project.doday.dto.ReportFindAllRes;
 import com.project.doday.dto.SolutionRejectReq;
 import com.project.doday.dto.SolutionReq;
 import com.project.doday.repository.*;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
