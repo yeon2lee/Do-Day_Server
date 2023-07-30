@@ -11,10 +11,12 @@ import com.project.doday.repository.ReportRepository;
 import com.project.doday.repository.SolutionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AdminService {
 
@@ -24,7 +26,7 @@ public class AdminService {
     /**
      * 해결한 신고 승인하기
      */
-    public Solution approveSolution(Long solutionId) {
+    public Solution approveSolution(Long solutionId, Long adminId) {
         Solution solution = solutionRepository.findById(solutionId).get();
         solution.setState(SolutionState.CONFIRMED);
         return solution;
@@ -33,10 +35,11 @@ public class AdminService {
     /**
      * 해결한 신고 반려하기
      */
-    public Solution rejectSolution(Long solutionId) {
+    public Solution rejectSolution(Long solutionId, Long adminId) {
         Solution solution = solutionRepository.findById(solutionId).get();
         solution.setState(SolutionState.REJECTED);
-        // TODO: report의 state를 해결완료(RESOLVED)에서 미해결(UNRESOLVED)로 변경
+        // TODO report의 state를 해결완료(RESOLVED)에서 미해결(UNRESOLVED)로 변경
+        // TODO 반려 사유 추가
         return solution;
     }
 }
