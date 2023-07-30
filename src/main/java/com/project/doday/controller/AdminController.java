@@ -1,7 +1,9 @@
 package com.project.doday.controller;
 
+import com.project.doday.domain.Report;
 import com.project.doday.domain.Solution;
 import com.project.doday.dto.ReportFindAllRes;
+import com.project.doday.dto.ReportRejectReq;
 import com.project.doday.dto.SolutionRejectReq;
 import com.project.doday.dto.SolutionReq;
 import com.project.doday.repository.AdminRepository;
@@ -36,4 +38,21 @@ public class AdminController {
         return new ResponseEntity(solution, HttpStatus.OK);
     }
 
+    /**
+     * 새로운 신고 승인하기
+     */
+    @PutMapping("/report/approval/{reportId}")
+    public ResponseEntity<Report> approvalReport(@PathVariable Long reportId) {
+        Report report = adminService.approveReport(reportId);
+        return new ResponseEntity(report, HttpStatus.OK);
+    }
+
+    /**
+     * 새로운 신고 반려하기
+     */
+    @PutMapping("/report/reject/{reportId}")
+    public ResponseEntity<Solution> rejectSolution(@PathVariable Long reportId, @RequestBody ReportRejectReq reportRejectReq) {
+        Report report = adminService.rejectReport(reportId, reportRejectReq);
+        return new ResponseEntity(report, HttpStatus.OK);
+    }
 }

@@ -2,6 +2,7 @@ package com.project.doday.service;
 
 import com.project.doday.domain.*;
 import com.project.doday.dto.ReportFindAllRes;
+import com.project.doday.dto.ReportRejectReq;
 import com.project.doday.dto.SolutionRejectReq;
 import com.project.doday.dto.SolutionReq;
 import com.project.doday.repository.*;
@@ -20,6 +21,8 @@ public class AdminService {
     private final AdminRepository adminRepository;
     private final SolutionRepository solutionRepository;
     private final SolutionRejectRepository solutionRejectRepository;
+    private final ReportRepository reportRepository;
+    private final ReportRejectRepository reportRejectRepository;
 
     /**
      * 해결한 신고 승인하기
@@ -44,5 +47,28 @@ public class AdminService {
         solutionRejectRepository.save(solutionReject);
 
         return solution;
+    }
+
+    /**
+     * 새로운 신고 승인하기
+     */
+    public Report approveReport(Long reportId) {
+        Report report = reportRepository.findById(reportId).get();
+        report.setState(ReportState.UNRESOLVED);
+        return report;
+    }
+
+    /**
+     * 새로운 신고 반려하기
+     */
+    public Report rejectReport(Long reportId, ReportRejectReq reportRejectReq) {
+        Report report = reportRepository.findById(reportId).get();
+        Admin admin = adminRepository.findById(reportRejectReq.getAdminId()).get();
+        report.setState(ReportState.REJECTED);
+
+        ReportReject reportReject = new ReportReject(reportId, admin, reportRejectReq.getContent());
+        reportRejectRepository.save(reportReject);
+
+        return report;
     }
 }
