@@ -1,11 +1,10 @@
 package com.project.doday.controller;
 
 import com.project.doday.domain.Report;
-import com.project.doday.domain.Solution;
+import com.project.doday.dto.ReportDetailRes;
 import com.project.doday.dto.ReportFindAllRes;
 import com.project.doday.dto.ReportReq;
 import com.project.doday.service.ReportService;
-import com.project.doday.service.SolutionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,13 +34,19 @@ public class ReportController {
      * 신고 전체 목록 보기 - 미해결
      */
     @GetMapping("")
-    public ResponseEntity<ArrayList<ReportFindAllRes>> findAllReport(){
+    public ArrayList<ReportFindAllRes> findAllReport(){
         ArrayList<ReportFindAllRes> allReport = reportService.findAllReport();
-        return new ResponseEntity(allReport, HttpStatus.OK);
+        return allReport;
     }
 
     /**
      * 신고 상세보기
      */
+    @GetMapping("{reportId}")
+    public ReportDetailRes getReport(@PathVariable Long reportId) {
+        ReportDetailRes report = reportService.getReport(reportId);
+        return report;
+    }
+
 
 }
