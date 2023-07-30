@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class Report extends BaseEntity {
+
     @Id @GeneratedValue
     private Long id;
 }
