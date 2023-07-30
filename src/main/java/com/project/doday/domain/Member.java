@@ -23,4 +23,5 @@ public class Member {
     public void covertReward(Long amount) {
         nowReward -= amount;
     }
+
 }
