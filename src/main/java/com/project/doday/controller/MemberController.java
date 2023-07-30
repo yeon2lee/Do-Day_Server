@@ -1,5 +1,6 @@
 package com.project.doday.controller;
 
+import com.project.doday.dto.MyReportRes;
 import com.project.doday.dto.SolutionListRes;
 import com.project.doday.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,5 +24,15 @@ public class MemberController {
 //        List<SolutionListRes> solutionList = memberService.getMySolution(memberId);
 //        return solutionList;
 //    }
+
+
+    /**
+     * 나의 신고 목록 보기
+     */
+    @GetMapping("/mypage/report/{memberId}")
+    public ArrayList<MyReportRes> getMyReportList(@PathVariable Long memberId){
+        ArrayList<MyReportRes> myReportList = memberService.getMyReport(memberId);
+        return myReportList;
+    }
 
 }
