@@ -27,6 +27,9 @@ public class AdminController {
     /**
      * 해결한 신고 승인하기
      */
+    @Operation(summary = "해결한 신고 승인하기 API", description = "관리자가 해결을 승인할 때 사용되는 API입니다.")
+    @Parameter(name = "solutionId", description = "해결 고유 id값")
+    @Parameter(name = "adminId", description = "관리자 고유 id값")
     @PutMapping("/solution/approval/{solutionId}/{adminId}")
     public ResponseEntity<Solution> approvalSolution(@PathVariable Long solutionId, @PathVariable Long adminId) {
         Solution solution = adminService.approveSolution(solutionId, adminId);
@@ -36,6 +39,9 @@ public class AdminController {
     /**
      * 해결한 신고 반려하기
      */
+    @Operation(summary = "해결한 신고 반려하기 API", description = "관리자가 해결을 반려시킬 때 사용되는 API입니다.")
+    @Parameter(name = "solutionId", description = "해결 고유 id값")
+    @Parameter(name = "adminId", description = "관리자 고유 id값")
     @PutMapping("/solution/reject/{solutionId}/{adminId}")
     public ResponseEntity<Solution> rejectSolution(@PathVariable Long solutionId, @PathVariable Long adminId, @RequestBody SolutionRejectReq solutionRejectReq) {
         Solution solution = adminService.rejectSolution(solutionId, adminId, solutionRejectReq);

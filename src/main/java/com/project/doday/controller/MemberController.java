@@ -23,11 +23,13 @@ public class MemberController {
     /**
      * 나의 해결 목록 보기
      */
-//    @GetMapping("/mypage/solution/{memberId}")
-//    public List<SolutionListRes> getSolutionList(@PathVariable Long memberId) {
-//        List<SolutionListRes> solutionList = memberService.getMySolution(memberId);
-//        return solutionList;
-//    }
+    @Operation(summary = "나의 해결 목록 보기 API", description = "나의 해결 목록들을 볼 때 사용되는 API입니다.")
+    @GetMapping("/mypage/solution/{memberId}")
+    @Parameter(name = "memberId", description = "내 고유 id값")
+    public List<SolutionListRes> getSolutionList(@PathVariable Long memberId) {
+        List<SolutionListRes> solutionList = memberService.getMySolution(memberId);
+        return solutionList;
+    }
 
 
     /**
