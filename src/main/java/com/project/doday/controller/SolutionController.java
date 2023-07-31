@@ -5,6 +5,7 @@ import com.project.doday.dto.SolutionDetailRes;
 import com.project.doday.dto.SolutionListRes;
 import com.project.doday.dto.SolutionReq;
 import com.project.doday.service.SolutionService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "해결하기 API", description = "해결 관련 API")
 public class SolutionController {
     private final SolutionService solutionService;
 
