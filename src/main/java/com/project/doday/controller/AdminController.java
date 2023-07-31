@@ -8,6 +8,9 @@ import com.project.doday.dto.SolutionRejectReq;
 import com.project.doday.dto.SolutionReq;
 import com.project.doday.repository.AdminRepository;
 import com.project.doday.service.AdminService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "관리자 API", description = "관리자 관련 API")
 public class AdminController {
     private final AdminService adminService;
 
@@ -41,7 +45,9 @@ public class AdminController {
     /**
      * 새로운 신고 승인하기
      */
+    @Operation(summary = "새로운 신고 승인하기 API", description = "관리자가 새로운 신고를 승인할 때 사용되는 API입니다.")
     @PutMapping("/report/approval/{reportId}")
+    @Parameter(name = "reportId", description = "신고 고유 id값")
     public ResponseEntity<Report> approvalReport(@PathVariable Long reportId) {
         Report report = adminService.approveReport(reportId);
         return new ResponseEntity(report, HttpStatus.OK);
@@ -50,7 +56,9 @@ public class AdminController {
     /**
      * 새로운 신고 반려하기
      */
+    @Operation(summary = "새로운 신고 반려하기 API", description = "관리자가 새로운 신고를 반려할 때 사용되는 API입니다.")
     @PutMapping("/report/reject/{reportId}")
+    @Parameter(name = "reportId", description = "신고 고유 id값")
     public ResponseEntity<Solution> rejectSolution(@PathVariable Long reportId, @RequestBody ReportRejectReq reportRejectReq) {
         Report report = adminService.rejectReport(reportId, reportRejectReq);
         return new ResponseEntity(report, HttpStatus.OK);

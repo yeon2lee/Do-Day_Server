@@ -1,5 +1,6 @@
 package com.project.doday.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import com.project.doday.domain.Reward;
 import com.project.doday.service.RewardService;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "리워드 API", description = "리워드 관련 API")
 public class RewardController {
     private final RewardService rewardService;
 
