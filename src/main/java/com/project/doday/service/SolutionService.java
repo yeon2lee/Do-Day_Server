@@ -11,7 +11,9 @@ import com.project.doday.repository.SolutionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,7 @@ public class SolutionService {
     private final MemberRepository memberRepository;
     private final ReportRepository reportRepository;
     private final SolutionRejectRepository solutionRejectRepository;
+    private final S3Uploader s3Uploader;
 
     /**
      * 해결 신청하기
@@ -33,13 +36,9 @@ public class SolutionService {
         Member member = memberRepository.findById(memberId).get();
         Report report = reportRepository.findById(reportId).get();
 
-        Solution save = solutionRepository.save(new Solution());
-        save.setMember(member);
-        save.setReport(report);
-        // TODO solution의 reportDate를 Report를 생성한 날짜로 설정
-        //save.setReportDate(report.getCreatedDate());
-        save.setState(SolutionState.RESOLVING);
-        // TODO: report의 state를 해결 중으로 바꾸기
+        Solution save = solutionRepository.save(new Solution(null, member, report, report.getLatitude(), report.getLongitude(), report.getLocation(),
+                null, null, SolutionState.RESOLVING, report.getCreatedDate()));
+        report.setState(ReportState.RESOLVING);
 
         return save;
     }
@@ -49,12 +48,18 @@ public class SolutionService {
      */
     public Solution reportSolution(Long solutionId, Long memberId, SolutionReq solutionReq) {
         Solution solution = solutionRepository.findById(solutionId).get();
+        MultipartFile image = solutionReq.getPhoto();
+        System.out.println("image = " + image);
+        if(!image.isEmpty()) {
+            String storedFileName = null;
+            storedFileName = s3Uploader.upload("images", image);
+            solution.setPhoto(storedFileName);
+        }
 
-        solution.setLatitude(solutionReq.getLatitude());
-        solution.setLongitude(solutionReq.getLongitude());
-        solution.setLocation(solutionReq.getLocation());
-        solution.setPhoto(solutionReq.getPhoto());
-        solution.setFalseReport(solutionReq.getFalseReport());
+        solution.setPhoto(solution.getPhoto());
+        if (solutionReq.getFalseReport() != null) {
+            solution.setFalseReport(solutionReq.getFalseReport());
+        }
 
         return solution;
     }
@@ -73,7 +78,7 @@ public class SolutionService {
             if (solutionReject.isPresent()) {
                 content = solutionReject.get().getContent();
             } else {
-                content = "";
+                content = null;
             }
 
             SolutionListRes solutionRes = new SolutionListRes(

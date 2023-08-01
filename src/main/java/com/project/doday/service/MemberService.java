@@ -39,7 +39,7 @@ public class MemberService {
             if (solutionReject.isPresent()) {
                 content = solutionReject.get().getContent();
             } else {
-                content = null; // 반려가 아니라 승인일 경우에는 null로 보냄
+                content = null; // 반려가 아니라 승인일 경우에는 ""로 보냄
             }
 
             if(solution.getMember().getId() == memberId) {
