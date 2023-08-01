@@ -33,13 +33,9 @@ public class SolutionService {
         Member member = memberRepository.findById(memberId).get();
         Report report = reportRepository.findById(reportId).get();
 
-        Solution save = solutionRepository.save(new Solution());
-        save.setMember(member);
-        save.setReport(report);
-        // TODO solution의 reportDate를 Report를 생성한 날짜로 설정
-        //save.setReportDate(report.getCreatedDate());
-        save.setState(SolutionState.RESOLVING);
-        // TODO: report의 state를 해결 중으로 바꾸기
+        Solution save = solutionRepository.save(new Solution(null, member, report, report.getLatitude(), report.getLongitude(), report.getLocation(),
+                null, null, SolutionState.RESOLVING, report.getCreatedDate()));
+        report.setState(ReportState.RESOLVING);
 
         return save;
     }
@@ -50,11 +46,10 @@ public class SolutionService {
     public Solution reportSolution(Long solutionId, Long memberId, SolutionReq solutionReq) {
         Solution solution = solutionRepository.findById(solutionId).get();
 
-        solution.setLatitude(solutionReq.getLatitude());
-        solution.setLongitude(solutionReq.getLongitude());
-        solution.setLocation(solutionReq.getLocation());
         solution.setPhoto(solutionReq.getPhoto());
-        solution.setFalseReport(solutionReq.getFalseReport());
+        if (solutionReq.getFalseReport() != null) {
+            solution.setFalseReport(solutionReq.getFalseReport());
+        }
 
         return solution;
     }
@@ -73,7 +68,7 @@ public class SolutionService {
             if (solutionReject.isPresent()) {
                 content = solutionReject.get().getContent();
             } else {
-                content = "";
+                content = null;
             }
 
             SolutionListRes solutionRes = new SolutionListRes(

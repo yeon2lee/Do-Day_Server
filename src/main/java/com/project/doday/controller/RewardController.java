@@ -35,7 +35,7 @@ public class RewardController {
      */
     @Operation(summary = "리워드 전환하기 API", description = "리워드를 전환할 때 사용되는 API입니다.")
     @Parameter(name = "memberId", description = "내 고유 id값")
-    @PutMapping("/reward/convert/{memberId}")
+    @PostMapping("/reward/convert/{memberId}")
     public Long convertReward(@PathVariable Long memberId, @RequestBody RewardConvertReq rewardConvertReq) {
         Long convertReward = rewardService.convertReward(memberId, rewardConvertReq);
         return convertReward;

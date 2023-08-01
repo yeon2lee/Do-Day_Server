@@ -37,7 +37,7 @@ public class SolutionController {
      * 해결한 문제 보고하기
      */
     @Operation(summary = "해결한 문제 보고하기 API", description = "해결한 문제를 보고할 때 사용되는 API입니다.")
-    @PutMapping("/solution/{solutionId}/{memberId}")
+    @PostMapping("/solution/{solutionId}/{memberId}")
     @Parameter(name = "solutionId", description = "해결 고유 id값")
     @Parameter(name = "memberId", description = "내 고유 id값")
     public ResponseEntity<Solution> reportSolution(@PathVariable Long solutionId, @PathVariable Long memberId,
