@@ -1,16 +1,10 @@
 package com.project.doday.service;
 
-import com.project.doday.domain.Member;
-import com.project.doday.domain.Report;
-import com.project.doday.domain.Solution;
-import com.project.doday.domain.SolutionReject;
+import com.project.doday.domain.*;
 import com.project.doday.dto.MyReportRes;
 import com.project.doday.dto.MyRewardRes;
 import com.project.doday.dto.SolutionListRes;
-import com.project.doday.repository.MemberRepository;
-import com.project.doday.repository.ReportRepository;
-import com.project.doday.repository.SolutionRejectRepository;
-import com.project.doday.repository.SolutionRepository;
+import com.project.doday.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +23,7 @@ public class MemberService {
     private final SolutionRejectRepository solutionRejectRepository;
     private final ReportRepository reportRepository;
     private final MemberRepository memberRepository;
+    private final ReportRejectRepository reportRejectRepository;
 
     /**
      * 나의 해결 목록 보기
@@ -68,10 +63,14 @@ public class MemberService {
         ArrayList<MyReportRes> myReport = new ArrayList<>();
 
         for(Report report : reports) {
+            Optional<ReportReject> reportsReject = reportRejectRepository.findById(report.getId());
+            String content;
+            content = reportsReject.map(ReportReject::getContent).orElse(null);
+
             if(Objects.equals(report.getMember().getId(), memberId)){
                 MyReportRes myReportRes = new MyReportRes(
                         report.getId(), report.getLocation(), report.getPhotoRaincatch(), report.getCreatedDate(),
-                        report.getState(), "");
+                        report.getState(), content);
                 myReport.add(myReportRes);
             }
         }
