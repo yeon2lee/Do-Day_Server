@@ -10,6 +10,7 @@ import com.project.doday.repository.ReportRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class ReportService {
 
     private final MemberRepository memberRepository;
     private final ReportRepository reportRepository;
+    private final S3Uploader s3Uploader;
 
     /**
      * 문제 신고하기
@@ -28,25 +30,34 @@ public class ReportService {
     public Long createReport(ReportReq reportReq) {
         Member member = memberRepository.findById(reportReq.getMemberId()).get();
 
+        String rcImage = "";
+        String arImage = "";
+
+        MultipartFile raincatchImage = reportReq.getPhotoRaincatch();
+        MultipartFile aroundImage;
+        if(reportReq.getPhotoAround() != null){
+            aroundImage = reportReq.getPhotoAround();
+            arImage = s3Uploader.upload("images", aroundImage);
+        }
+
+        System.out.println(raincatchImage.toString());
+        if(!raincatchImage.isEmpty()) {
+            rcImage = s3Uploader.upload("images", raincatchImage);
+        }
+
+
         Report createReport = Report.builder()
                 .member(member)
                 .latitude(reportReq.getLatitude())
                 .longitude(reportReq.getLongitude())
                 .location(reportReq.getLocation())
-                .photoRaincatch(reportReq.getPhotoRaincatch())
-                .photoAround(reportReq.getPhotoAround())
+                .photoRaincatch(rcImage)
+                .photoAround(arImage)
                 .description(reportReq.getDescription())
                 .state(ReportState.UNAPPROVAL)
                 .build();
 
-        System.out.println(createReport.getId());
-        System.out.println(createReport.getMember().getUserId());
-
         reportRepository.save(createReport);
-
-        System.out.println(createReport.getId());
-        System.out.println(createReport.getMember().getUserId());
-
         return createReport.getId();
 
     }

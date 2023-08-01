@@ -3,6 +3,7 @@ package com.project.doday.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.lang.Nullable;
 
 @Entity
 @Getter @Setter
@@ -21,6 +22,7 @@ public class Report extends BaseEntity {
 
     private String photoRaincatch;
 
+    @Nullable
     private String photoAround;
 
     private String description;

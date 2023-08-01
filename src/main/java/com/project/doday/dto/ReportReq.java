@@ -1,9 +1,12 @@
 package com.project.doday.dto;
 
+import com.project.doday.domain.Report;
+import com.project.doday.domain.Solution;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -23,11 +26,12 @@ public class ReportReq {
     private String location;
 
     @Schema(description = "빗물받이 사진" , example = "")
-    private String photoRaincatch;
+    private MultipartFile photoRaincatch;
 
     @Schema(description = "주변 환경 사진" , example = "")
-    private String photoAround;
+    private MultipartFile photoAround;
 
     @Schema(description = "신고 상세 설명" , example = "담배꽁초가 40개 이상 있는 것 같습니다.")
     private String description;
+
 }
