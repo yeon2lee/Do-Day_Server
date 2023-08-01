@@ -30,21 +30,21 @@ public class ReportService {
     public Long createReport(ReportReq reportReq) {
         Member member = memberRepository.findById(reportReq.getMemberId()).get();
 
-        MultipartFile raincatchImage = reportReq.getPhotoRaincatch();
-        MultipartFile aroundImage = reportReq.getPhotoAround();
+        String rcImage = "";
+        String arImage = "";
 
-        String rcImage = null;
-        String arImage = null;
+        MultipartFile raincatchImage = reportReq.getPhotoRaincatch();
+        MultipartFile aroundImage;
+        if(reportReq.getPhotoAround() != null){
+            aroundImage = reportReq.getPhotoAround();
+            arImage = s3Uploader.upload("images", aroundImage);
+        }
 
         System.out.println(raincatchImage.toString());
         if(!raincatchImage.isEmpty()) {
             rcImage = s3Uploader.upload("images", raincatchImage);
-            System.out.println(rcImage);
         }
 
-        if(!aroundImage.isEmpty()) {
-            arImage = s3Uploader.upload("images", aroundImage);
-        }
 
         Report createReport = Report.builder()
                 .member(member)
