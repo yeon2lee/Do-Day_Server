@@ -23,13 +23,22 @@ public class AdminService {
     private final SolutionRejectRepository solutionRejectRepository;
     private final ReportRepository reportRepository;
     private final ReportRejectRepository reportRejectRepository;
+    private final RewardRepository rewardRepository;
+    private final MemberRepository memberRepository;
 
     /**
      * 해결한 신고 승인하기
      */
     public Solution approveSolution(Long solutionId, Long adminId) {
         Solution solution = solutionRepository.findById(solutionId).get();
-        solution.setState(SolutionState.CONFIRMED);
+        solution.setState(SolutionState.CONFIRMED); // 태그를 확인완료로 변경
+
+        // TODO 리워드 적립금액 정하기 (여기서는 100원으로 고정)
+        Reward reward = new Reward(null, solution.getMember(), 100L, "해결하기", solution.getLocation());
+        rewardRepository.save(reward);
+        Member member = memberRepository.findById(solution.getMember().getId()).get();
+        member.earnReward(reward.getPrice());
+
         return solution;
     }
 

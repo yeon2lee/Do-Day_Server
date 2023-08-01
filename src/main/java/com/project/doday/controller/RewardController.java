@@ -25,7 +25,7 @@ public class RewardController {
     @Operation(summary = "나의 리워드 내역 보기 API", description = "나의 리워드 내역을 볼 때 사용되는 API입니다.")
     @Parameter(name = "memberId", description = "내 고유 id값")
     @GetMapping("/reward/{memberId}")
-    public List<RewardRes> getSolutionList(@PathVariable Long memberId) {
+    public List<RewardRes> getRewardList(@PathVariable Long memberId) {
         List<RewardRes> rewards = rewardService.getMyReward(memberId);
         return rewards;
     }

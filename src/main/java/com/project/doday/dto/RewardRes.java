@@ -20,7 +20,7 @@ public class RewardRes {
     @Schema(description = "적립 금액" , example = "100")
     private Long price;
 
-    @Schema(description = "신고/해결" , example = "신고")
+    @Schema(description = "신고하기/해결하기" , example = "신고하기")
     private String type;
 
     @Schema(description = "신고 위치" , example = "서울시 광진구 화양동 7")

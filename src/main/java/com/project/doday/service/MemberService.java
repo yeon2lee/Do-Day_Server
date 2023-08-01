@@ -1,9 +1,12 @@
 package com.project.doday.service;
 
+import com.project.doday.domain.Member;
 import com.project.doday.domain.Report;
 import com.project.doday.domain.Solution;
 import com.project.doday.dto.MyReportRes;
+import com.project.doday.dto.MyRewardRes;
 import com.project.doday.dto.SolutionListRes;
+import com.project.doday.repository.MemberRepository;
 import com.project.doday.repository.ReportRepository;
 import com.project.doday.repository.SolutionRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +24,7 @@ public class MemberService {
 
     private final SolutionRepository solutionRepository;
     private final ReportRepository reportRepository;
+    private final MemberRepository memberRepository;
 
     /**
      * 나의 해결 목록 보기
@@ -63,4 +67,12 @@ public class MemberService {
 
     }
 
+    /**
+     * 나의 리워드 금액 보기
+     */
+    public MyRewardRes getMyReward(Long memberId) {
+        Member member = memberRepository.findById(memberId).get();
+        MyRewardRes myRewardRes = new MyRewardRes(member.getNowReward(), member.getTotalReward());
+        return myRewardRes;
+    }
 }
