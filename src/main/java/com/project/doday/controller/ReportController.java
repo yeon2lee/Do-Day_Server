@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
 
@@ -27,8 +28,8 @@ public class ReportController {
      * 새로운 신고하기
      */
     @Operation(summary = "새로운 신고하기 API", description = "사용자가 새로운 신고를 할 때 사용되는 API입니다.")
-    @PostMapping("")
-    public ResponseEntity<Report> createReport(@RequestBody ReportReq reportReq){
+    @PostMapping(value="", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Report> createReport(@ModelAttribute ReportReq reportReq){
         Long report = reportService.createReport(reportReq);
         return new ResponseEntity(report, HttpStatus.OK);
     }
