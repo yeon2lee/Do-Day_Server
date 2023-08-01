@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,14 +38,14 @@ public class SolutionController {
      * 해결한 문제 보고하기
      */
     @Operation(summary = "해결한 문제 보고하기 API", description = "해결한 문제를 보고할 때 사용되는 API입니다.")
-    @PostMapping("/solution/{solutionId}/{memberId}")
+    @PostMapping(value="/solution/{solutionId}/{memberId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Parameter(name = "solutionId", description = "해결 고유 id값")
     @Parameter(name = "memberId", description = "내 고유 id값")
     public ResponseEntity<Solution> reportSolution(@PathVariable Long solutionId, @PathVariable Long memberId,
-                                                   @RequestBody SolutionReq solutionReq) {
+                                                   @ModelAttribute SolutionReq solutionReq) {
         Solution solution = solutionService.reportSolution(solutionId, memberId, solutionReq);
-        //TODO 추후에 예외처리 추가
-        return new ResponseEntity(solutionReq, HttpStatus.OK);
+        // TODO 추후에 예외처리 추가
+        return new ResponseEntity(solution, HttpStatus.OK);
     }
 
     /**

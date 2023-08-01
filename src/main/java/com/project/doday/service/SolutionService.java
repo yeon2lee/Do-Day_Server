@@ -11,7 +11,9 @@ import com.project.doday.repository.SolutionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,7 @@ public class SolutionService {
     private final MemberRepository memberRepository;
     private final ReportRepository reportRepository;
     private final SolutionRejectRepository solutionRejectRepository;
+    private final S3Uploader s3Uploader;
 
     /**
      * 해결 신청하기
@@ -45,8 +48,15 @@ public class SolutionService {
      */
     public Solution reportSolution(Long solutionId, Long memberId, SolutionReq solutionReq) {
         Solution solution = solutionRepository.findById(solutionId).get();
+        MultipartFile image = solutionReq.getPhoto();
+        System.out.println("image = " + image);
+        if(!image.isEmpty()) {
+            String storedFileName = null;
+            storedFileName = s3Uploader.upload("images", image);
+            solution.setPhoto(storedFileName);
+        }
 
-        solution.setPhoto(solutionReq.getPhoto());
+        solution.setPhoto(solution.getPhoto());
         if (solutionReq.getFalseReport() != null) {
             solution.setFalseReport(solutionReq.getFalseReport());
         }
