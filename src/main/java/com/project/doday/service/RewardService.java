@@ -3,6 +3,7 @@ package com.project.doday.service;
 import com.project.doday.domain.Member;
 import com.project.doday.domain.Reward;
 import com.project.doday.domain.Solution;
+import com.project.doday.dto.RewardConvertReq;
 import com.project.doday.dto.RewardRes;
 import com.project.doday.repository.MemberRepository;
 import com.project.doday.repository.RewardRepository;
@@ -23,13 +24,16 @@ public class RewardService {
     /**
      * 리워드 내역 확인하기
      */
-    public List<Reward> getMyReward(Long memberId) {
+    public List<RewardRes> getMyReward(Long memberId) {
         List<Reward> rewards = rewardRepository.findAll();
-        List<Reward> myReward = new ArrayList<>();
+        List<RewardRes> myReward = new ArrayList<>();
 
         for(Reward reward : rewards){
-            if(reward.getMember().getId() == memberId)
-                myReward.add(reward);
+            if(reward.getMember().getId() == memberId) {
+                RewardRes rewardRes = new RewardRes(reward.getId(), reward.getCreatedDate(),
+                        reward.getPrice(), reward.getType(), reward.getLocation());
+                myReward.add(rewardRes);
+            }
         }
         return myReward;
     }
@@ -37,9 +41,9 @@ public class RewardService {
     /**
      * 리워드 전환하기
      */
-    public Long convertReward(Long memberId, Long amount) {
+    public Long convertReward(Long memberId, RewardConvertReq rewardConvertReq) {
         Member member = memberRepository.findById(memberId).get();
-        member.covertReward(amount);
+        member.covertReward(rewardConvertReq.getAmount());
         return member.getNowReward();
     }
 }

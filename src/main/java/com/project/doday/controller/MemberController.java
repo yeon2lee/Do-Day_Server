@@ -1,6 +1,7 @@
 package com.project.doday.controller;
 
 import com.project.doday.dto.MyReportRes;
+import com.project.doday.dto.MyRewardRes;
 import com.project.doday.dto.SolutionListRes;
 import com.project.doday.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,6 +42,17 @@ public class MemberController {
     public ArrayList<MyReportRes> getMyReportList(@PathVariable Long memberId){
         ArrayList<MyReportRes> myReportList = memberService.getMyReport(memberId);
         return myReportList;
+    }
+
+    /**
+     * 나의 리워드 금액 보기
+     */
+    @Operation(summary = "나의 리워드 금액 보기 API", description = "나의 리워드 금액을 볼 때 사용되는 API입니다.")
+    @GetMapping("/mypage/reward/{memberId}")
+    @Parameter(name = "memberId", description = "내 고유 id값")
+    public MyRewardRes getMyReward(@PathVariable Long memberId){
+        MyRewardRes myReward = memberService.getMyReward(memberId);
+        return myReward;
     }
 
 }

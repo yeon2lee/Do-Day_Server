@@ -22,6 +22,11 @@ public class Member {
     private Long nowReward;
     private Long totalReward;
 
+    public void earnReward(Long amount) {
+        nowReward += amount;
+        totalReward += amount;
+    }
+
     public void covertReward(Long amount) {
         nowReward -= amount;
     }
