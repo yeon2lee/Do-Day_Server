@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Schema(description = "해결 목록 모델")
 public class SolutionListRes {
     @Schema(description = "해결 아이디" , example = "1")
-    private Long id;
+    private Long solutionId;
 
     @Schema(description = "해결 신청 날짜" , example = "2023-08-01T09:03:23.924Z")
     private LocalDateTime createdDate;

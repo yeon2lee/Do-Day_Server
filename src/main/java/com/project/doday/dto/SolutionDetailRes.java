@@ -12,7 +12,7 @@ import lombok.Getter;
 public class SolutionDetailRes {
 
     @Schema(description = "해결 아이디" , example = "1")
-    private Long id;
+    private Long solutionId;
 
     @Schema(description = "신고 위도" , example = "37.5460")
     private Double latitude;

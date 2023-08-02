@@ -1,6 +1,7 @@
 package com.project.doday.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Solution extends BaseEntity {
     @Id @GeneratedValue
+    @JsonProperty(value="solutionId")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
