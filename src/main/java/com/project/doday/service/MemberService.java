@@ -44,7 +44,8 @@ public class MemberService {
 
             if(solution.getMember().getId() == memberId) {
                 SolutionListRes solutionRes = new SolutionListRes(
-                        solution.getId(), solution.getCreatedDate(), solution.getLocation(),
+                        solution.getId(), solution.getCreatedDate(),
+                        solution.getReportDate(), solution.getLocation(),
                         solution.getPhoto(), content, solution.getState());
 
                 mySolution.add(solutionRes);

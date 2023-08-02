@@ -18,6 +18,9 @@ public class SolutionListRes {
     @Schema(description = "해결 신청 날짜" , example = "2023-08-01T09:03:23.924Z")
     private LocalDateTime createdDate;
 
+    @Schema(description = "신고 날짜" , example = "2023-07-31T09:03:23.924Z")
+    private LocalDateTime reportDate;
+
     @Schema(description = "신고 위치" , example = "서울시 광진구 화양동 7")
     private String location;
 

@@ -84,7 +84,8 @@ public class SolutionService {
             }
 
             SolutionListRes solutionRes = new SolutionListRes(
-                    solution.getId(), solution.getCreatedDate(), solution.getLocation(),
+                    solution.getId(), solution.getCreatedDate(),
+                    solution.getReportDate(), solution.getLocation(),
                     solution.getPhoto(), content, solution.getState());
 
             solutionListRes.add(solutionRes);
@@ -106,7 +107,8 @@ public class SolutionService {
             content = null;
         }
 
-        SolutionDetailRes solutionDetailRes = new SolutionDetailRes(solutionId, solution.getLatitude(), solution.getLongitude(),
+        SolutionDetailRes solutionDetailRes = new SolutionDetailRes(solutionId, solution.getCreatedDate(), solution.getReportDate(),
+                solution.getLatitude(), solution.getLongitude(),
                 solution.getLocation(), solution.getPhoto(), solution.getFalseReport(), content, solution.getState());
         return solutionDetailRes;
     }
