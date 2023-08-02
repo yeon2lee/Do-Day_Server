@@ -6,15 +6,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
-
 @Getter
 @AllArgsConstructor
 @Schema(description = "신고 상세 모델")
 public class SolutionDetailRes {
 
     @Schema(description = "해결 아이디" , example = "1")
-    private Long solutionId;
+    private Long id;
 
     @Schema(description = "신고 위도" , example = "37.5460")
     private Double latitude;
