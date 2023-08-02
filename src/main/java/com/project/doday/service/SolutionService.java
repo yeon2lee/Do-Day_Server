@@ -48,6 +48,8 @@ public class SolutionService {
      */
     public Solution reportSolution(Long solutionId, Long memberId, SolutionReq solutionReq) {
         Solution solution = solutionRepository.findById(solutionId).get();
+        solution.setState(SolutionState.RESOLVED);
+
         MultipartFile image = solutionReq.getPhoto();
         System.out.println("image = " + image);
         if(!image.isEmpty()) {
@@ -69,7 +71,7 @@ public class SolutionService {
      */
     @Transactional(readOnly = true)
     public List<SolutionListRes> getSolutionList() {
-        List<Solution> solutions = solutionRepository.findAll();
+        List<Solution> solutions = solutionRepository.findAllPriority();
         List<SolutionListRes> solutionListRes = new ArrayList<>();
         for(Solution solution : solutions) {
             // 반려 내역 불러오기
@@ -82,7 +84,8 @@ public class SolutionService {
             }
 
             SolutionListRes solutionRes = new SolutionListRes(
-                    solution.getId(), solution.getReportDate(), solution.getLocation(),
+                    solution.getId(), solution.getCreatedDate(),
+                    solution.getReportDate(), solution.getLocation(),
                     solution.getPhoto(), content, solution.getState());
 
             solutionListRes.add(solutionRes);
@@ -95,8 +98,18 @@ public class SolutionService {
      */
     public SolutionDetailRes getSolution(Long solutionId) {
         Solution solution = solutionRepository.findById(solutionId).get();
-        SolutionDetailRes solutionDetailRes = new SolutionDetailRes(solutionId, solution.getLatitude(), solution.getLongitude(),
-                solution.getLocation(), solution.getPhoto(), solution.getFalseReport());
+        // 반려 내역 불러오기
+        Optional<SolutionReject> solutionReject = solutionRejectRepository.findById(solution.getId());
+        String content;
+        if (solutionReject.isPresent()) {
+            content = solutionReject.get().getContent();
+        } else {
+            content = null;
+        }
+
+        SolutionDetailRes solutionDetailRes = new SolutionDetailRes(solutionId, solution.getCreatedDate(), solution.getReportDate(),
+                solution.getLatitude(), solution.getLongitude(),
+                solution.getLocation(), solution.getPhoto(), solution.getFalseReport(), content, solution.getState());
         return solutionDetailRes;
     }
 

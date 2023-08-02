@@ -31,7 +31,7 @@ public class MyReportRes {
             "            21,\n" +
             "            10,\n" +
             "            496918000")
-    private LocalDateTime createDate;
+    private LocalDateTime createdDate;
 
     @Schema(description = "신고 상태" , example = "UNRESOLVED")
     private ReportState state;

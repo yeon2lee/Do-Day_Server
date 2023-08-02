@@ -16,6 +16,12 @@ public class SolutionDetailRes {
     @Schema(description = "해결 아이디" , example = "1")
     private Long solutionId;
 
+    @Schema(description = "해결 신청 날짜" , example = "2023-08-01T09:03:23.924Z")
+    private LocalDateTime createdDate;
+
+    @Schema(description = "신고 날짜" , example = "2023-07-31T09:03:23.924Z")
+    private LocalDateTime reportDate;
+
     @Schema(description = "신고 위도" , example = "37.5460")
     private Double latitude;
 
@@ -28,9 +34,14 @@ public class SolutionDetailRes {
     @Schema(description = "빗물받이를 청소한 사진" , example = "")
     private String photo;
 
-    @Schema(description = "반려사유" , example = "허위 보고로 판단되어 반려되었습니다.")
+    @Schema(description = "허위 신고 제보" , example = "허위 신고인 것 같습니다.")
+    private String falseReport;
+
+    @Schema(description = "반려사유" , example = "허위 보고로 판단되어 반려되었습니다. (반려가 아닐 경우에는 null)")
     private String content;
 
+    @Schema(description = "해결상태" , example = "RESOLVED")
+    private SolutionState state;
 
     public Solution toEntity() {
         return Solution.builder()
