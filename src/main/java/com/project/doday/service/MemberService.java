@@ -30,7 +30,7 @@ public class MemberService {
      */
     @Transactional(readOnly = true)
     public List<SolutionListRes> getMySolution(Long memberId) {
-        List<Solution> solutions = solutionRepository.findAll();
+        List<Solution> solutions = solutionRepository.findAllByOrderByCreatedDateDesc();
         List<SolutionListRes> mySolution = new ArrayList<>();
         for(Solution solution : solutions) {
             // 반려 내역 불러오기

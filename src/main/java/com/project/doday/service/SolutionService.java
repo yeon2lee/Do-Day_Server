@@ -48,6 +48,8 @@ public class SolutionService {
      */
     public Solution reportSolution(Long solutionId, Long memberId, SolutionReq solutionReq) {
         Solution solution = solutionRepository.findById(solutionId).get();
+        solution.setState(SolutionState.RESOLVED);
+
         MultipartFile image = solutionReq.getPhoto();
         System.out.println("image = " + image);
         if(!image.isEmpty()) {
@@ -69,7 +71,7 @@ public class SolutionService {
      */
     @Transactional(readOnly = true)
     public List<SolutionListRes> getSolutionList() {
-        List<Solution> solutions = solutionRepository.findAll();
+        List<Solution> solutions = solutionRepository.findAllPriority();
         List<SolutionListRes> solutionListRes = new ArrayList<>();
         for(Solution solution : solutions) {
             // 반려 내역 불러오기
