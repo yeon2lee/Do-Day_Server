@@ -96,7 +96,7 @@ public class SolutionService {
     public SolutionDetailRes getSolution(Long solutionId) {
         Solution solution = solutionRepository.findById(solutionId).get();
         SolutionDetailRes solutionDetailRes = new SolutionDetailRes(solutionId, solution.getLatitude(), solution.getLongitude(),
-                solution.getLocation(), solution.getPhoto(), solution.getFalseReport());
+                solution.getLocation(), solution.getPhoto(), solution.getFalseReport(), solution.getState());
         return solutionDetailRes;
     }
 

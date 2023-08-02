@@ -28,9 +28,11 @@ public class SolutionDetailRes {
     @Schema(description = "빗물받이를 청소한 사진" , example = "")
     private String photo;
 
-    @Schema(description = "반려사유" , example = "허위 보고로 판단되어 반려되었습니다.")
+    @Schema(description = "반려사유" , example = "허위 보고로 판단되어 반려되었습니다. (반려가 아닐 경우에는 null)")
     private String content;
 
+    @Schema(description = "해결상태" , example = "RESOLVED")
+    private SolutionState state;
 
     public Solution toEntity() {
         return Solution.builder()
