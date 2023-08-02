@@ -23,5 +23,5 @@ public class ReportFindAllRes {
     private String photoRaincatch;
 
     @Schema(description = "신고 날짜" , example = "2023-07-31T09:03:23.924Z")
-    private LocalDateTime createDate;
+    private LocalDateTime createdDate;
 }
