@@ -26,6 +26,9 @@ public class SolutionDetailRes {
     @Schema(description = "빗물받이를 청소한 사진" , example = "")
     private String photo;
 
+    @Schema(description = "허위 신고 제보" , example = "허위 신고인 것 같습니다.")
+    private String falseReport;
+
     @Schema(description = "반려사유" , example = "허위 보고로 판단되어 반려되었습니다. (반려가 아닐 경우에는 null)")
     private String content;
 
