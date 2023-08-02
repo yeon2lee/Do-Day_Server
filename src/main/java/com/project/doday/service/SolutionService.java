@@ -82,7 +82,7 @@ public class SolutionService {
             }
 
             SolutionListRes solutionRes = new SolutionListRes(
-                    solution.getId(), solution.getReportDate(), solution.getLocation(),
+                    solution.getId(), solution.getCreatedDate(), solution.getLocation(),
                     solution.getPhoto(), content, solution.getState());
 
             solutionListRes.add(solutionRes);

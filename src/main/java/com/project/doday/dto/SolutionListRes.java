@@ -15,8 +15,8 @@ public class SolutionListRes {
     @Schema(description = "해결 아이디" , example = "1")
     private Long id;
 
-    @Schema(description = "신고 날짜" , example = "2023-07-31T09:03:23.924Z")
-    private LocalDateTime reportDate;
+    @Schema(description = "해결 신청 날짜" , example = "2023-08-01T09:03:23.924Z")
+    private LocalDateTime createdDate;
 
     @Schema(description = "신고 위치" , example = "서울시 광진구 화양동 7")
     private String location;
@@ -32,7 +32,7 @@ public class SolutionListRes {
 
     public Solution toEntity() {
         return Solution.builder()
-                .reportDate(reportDate)
+                .reportDate(createdDate)
                 .location(location)
                 .photo(photo)
                 .state(state)
