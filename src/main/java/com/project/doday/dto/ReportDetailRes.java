@@ -1,5 +1,6 @@
 package com.project.doday.dto;
 
+import com.project.doday.domain.ReportState;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,4 +34,7 @@ public class ReportDetailRes {
 
     @Schema(description = "신고 상세 설명" , example = "담배꽁초가 40개 이상 있는 것 같습니다.")
     private String description;
+
+    @Schema(description = "신고 상태" , example = "UNRESOLVED")
+    private ReportState state;
 }
