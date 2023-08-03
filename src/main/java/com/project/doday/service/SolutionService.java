@@ -36,11 +36,21 @@ public class SolutionService {
         Member member = memberRepository.findById(memberId).get();
         Report report = reportRepository.findById(reportId).get();
 
-        Solution save = solutionRepository.save(new Solution(null, member, report, report.getLatitude(), report.getLongitude(), report.getLocation(),
-                null, null, SolutionState.RESOLVING, report.getCreatedDate()));
+        Solution createSolution = Solution.builder()
+                .member(member)
+                .report(report)
+                .latitude(report.getLatitude())
+                .longitude(report.getLongitude())
+                .location(report.getLocation())
+                .photo("")
+                .falseReport("")
+                .state(SolutionState.RESOLVING)
+                .reportDate(report.getCreatedDate())
+                .build();
+        solutionRepository.save(createSolution);
         report.setState(ReportState.RESOLVING);
 
-        return save;
+        return createSolution;
     }
 
     /**
@@ -48,7 +58,9 @@ public class SolutionService {
      */
     public Solution reportSolution(Long solutionId, Long memberId, SolutionReq solutionReq) {
         Solution solution = solutionRepository.findById(solutionId).get();
+        Report report = reportRepository.findById(solution.getReport().getId()).get();
         solution.setState(SolutionState.RESOLVED);
+        report.setState(ReportState.RESOLVED);
 
         MultipartFile image = solutionReq.getPhoto();
         System.out.println("image = " + image);
@@ -80,7 +92,7 @@ public class SolutionService {
             if (solutionReject.isPresent()) {
                 content = solutionReject.get().getContent();
             } else {
-                content = null;
+                content = "";
             }
 
             SolutionListRes solutionRes = new SolutionListRes(
@@ -104,7 +116,7 @@ public class SolutionService {
         if (solutionReject.isPresent()) {
             content = solutionReject.get().getContent();
         } else {
-            content = null;
+            content = "";
         }
 
         SolutionDetailRes solutionDetailRes = new SolutionDetailRes(solutionId, solution.getCreatedDate(), solution.getReportDate(),

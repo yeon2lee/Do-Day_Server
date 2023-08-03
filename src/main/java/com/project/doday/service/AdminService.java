@@ -47,9 +47,12 @@ public class AdminService {
      */
     public Solution rejectSolution(Long solutionId, Long adminId, SolutionRejectReq solutionRejectReq) {
         Solution solution = solutionRepository.findById(solutionId).get();
+        Report report = reportRepository.findById(solution.getReport().getId()).get();
         Admin admin = adminRepository.findById(adminId).get();
         solution.setState(SolutionState.REJECTED);
-        // TODO report의 state를 해결완료(RESOLVED)에서 미해결(UNRESOLVED)로 변경
+
+        // report의 state를 해결완료(RESOLVED)에서 미해결(UNRESOLVED)로 변경
+        report.setState(ReportState.UNRESOLVED);
 
         // 반려 내역 추가
         SolutionReject solutionReject = new SolutionReject(solutionId, admin, solutionRejectReq.getContent());
