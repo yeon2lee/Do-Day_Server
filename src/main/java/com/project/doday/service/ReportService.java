@@ -71,7 +71,7 @@ public class ReportService {
         ArrayList<Report> reports = reportRepository.findAllByStateOrderByCreatedDateDesc(ReportState.UNRESOLVED);
 
         for(Report report: reports) {
-            findResult.add(new ReportFindAllRes(report.getId(), report.getLocation(), report.getPhotoRaincatch(), report.getCreatedDate()));
+            findResult.add(new ReportFindAllRes(report.getId(), report.getLocation(), report.getPhotoRaincatch(), report.getCreatedDate(), report.getState()));
         }
         return findResult;
     }
@@ -85,7 +85,7 @@ public class ReportService {
         ArrayList<Report> reports = reportRepository.findAllByStateOrderByCreatedDateDesc(ReportState.UNAPPROVAL);
 
         for(Report report: reports) {
-            findAdminReport.add(new ReportFindAllRes(report.getId(), report.getLocation(), report.getPhotoRaincatch(), report.getCreatedDate()));
+            findAdminReport.add(new ReportFindAllRes(report.getId(), report.getLocation(), report.getPhotoRaincatch(), report.getCreatedDate(), report.getState()));
         }
         return findAdminReport;
     }

@@ -1,5 +1,6 @@
 package com.project.doday.dto;
 
+import com.project.doday.domain.ReportState;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,4 +25,8 @@ public class ReportFindAllRes {
 
     @Schema(description = "신고 날짜" , example = "2023-07-31T09:03:23.924Z")
     private LocalDateTime createdDate;
+
+    @Schema(description = "신고 상태" , example = "UNRESOLVED")
+    private ReportState state;
+
 }

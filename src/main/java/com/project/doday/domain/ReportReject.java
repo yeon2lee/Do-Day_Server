@@ -1,5 +1,6 @@
 package com.project.doday.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,8 +15,9 @@ public class ReportReject {
 
     private Long reportId;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_id")
+    @JsonIgnore
     private Admin admin;
 
     private String content;
