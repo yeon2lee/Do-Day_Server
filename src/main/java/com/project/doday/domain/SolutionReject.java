@@ -23,8 +23,8 @@ public class SolutionReject {
     private String content;
 
     @Builder
-    public SolutionReject(Long reportId, Admin admin, String content) {
-        this.solutionId = reportId;
+    public SolutionReject(Long solutionId, Admin admin, String content) {
+        this.solutionId = solutionId;
         this.admin = admin;
         this.content = content;
     }
