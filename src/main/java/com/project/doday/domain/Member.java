@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +30,14 @@ public class Member {
 
     public void covertReward(Long amount) {
         nowReward -= amount;
+    }
+
+    @Builder
+    public Member(String userId, String password, Long nowReward, Long totalReward) {
+        this.userId = userId;
+        this.password = password;
+        this.nowReward = nowReward;
+        this.totalReward = totalReward;
     }
 
 }

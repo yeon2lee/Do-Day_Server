@@ -1,19 +1,18 @@
 package com.project.doday.controller;
 
-import com.project.doday.dto.MyReportRes;
-import com.project.doday.dto.MyRewardRes;
-import com.project.doday.dto.SolutionListRes;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.project.doday.dto.*;
 import com.project.doday.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.project.doday.dto.ErrorMessage.ALREADY_SIGNUPED_USER;
 
 @Tag(name = "사용자 API", description = "사용자 관련 API")
 @RestController
@@ -54,5 +53,28 @@ public class MemberController {
         MyRewardRes myReward = memberService.getMyReward(memberId);
         return myReward;
     }
+
+    /**
+     * 회원가입
+     */
+    @Operation(summary = "회원가입 API", description = "회원가입 시 사용되는 API입니다.")
+    @PostMapping("/signup")
+    public BaseResponseDto<MemberSignRes> create(@RequestBody MemberSignReq memberSignReq){
+        Long userId = memberService.signInMember(memberSignReq);
+        if(userId == -1) return new BaseResponseDto(ALREADY_SIGNUPED_USER);
+        else return new BaseResponseDto(new MemberSignRes(userId));
+    }
+
+    /**
+     * 로그인
+     */
+    @Operation(summary = "로그인 API", description = "로그인 시 사용되는 API입니다.")
+    @PostMapping("/login")
+    public BaseResponseDto<MemberLoginRes> login(@RequestBody MemberLoginReq memberLoginReq){
+        MemberLoginRes memberLoginRes = memberService.login(memberLoginReq);
+        return new BaseResponseDto<>(memberLoginRes);
+    }
+
+
 
 }
