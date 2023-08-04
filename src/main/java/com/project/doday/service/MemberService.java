@@ -59,7 +59,7 @@ public class MemberService {
      */
     @Transactional(readOnly = true)
     public ArrayList<MyReportRes> getMyReport(Long memberId){
-        List<Report> reports = reportRepository.findAll();
+        List<Report> reports = reportRepository.findAllByMemberIdOrderByCreatedDateDesc(memberId);
         ArrayList<MyReportRes> myReport = new ArrayList<>();
 
         for(Report report : reports) {
