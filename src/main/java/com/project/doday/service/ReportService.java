@@ -96,7 +96,7 @@ public class ReportService {
      */
     public ReportDetailRes getReport(Long reportId) {
         Report report = reportRepository.findById(reportId).get();
-        ReportDetailRes reportDetailRes = new ReportDetailRes(reportId, report.getLatitude(), report.getLongitude(),
+        ReportDetailRes reportDetailRes = new ReportDetailRes(reportId, report.getMember().getId(), report.getLatitude(), report.getLongitude(),
                 report.getLocation(), report.getPhotoRaincatch(), report.getPhotoAround(), report.getDescription(), report.getState());
         return reportDetailRes;
     }
