@@ -33,7 +33,7 @@ public class MemberService {
         List<SolutionListRes> mySolution = new ArrayList<>();
         for(Solution solution : solutions) {
             // 반려 내역 불러오기
-            Optional<SolutionReject> solutionReject = solutionRejectRepository.findById(solution.getId());
+            Optional<SolutionReject> solutionReject = solutionRejectRepository.findBySolutionId(solution.getId());
             String content;
             if (solutionReject.isPresent()) {
                 content = solutionReject.get().getContent();
