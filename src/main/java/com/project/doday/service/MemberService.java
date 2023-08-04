@@ -1,9 +1,8 @@
 package com.project.doday.service;
 
 import com.project.doday.domain.*;
-import com.project.doday.dto.MyReportRes;
-import com.project.doday.dto.MyRewardRes;
-import com.project.doday.dto.SolutionListRes;
+import com.project.doday.dto.*;
+import com.project.doday.exception.BusinessException;
 import com.project.doday.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -87,4 +86,44 @@ public class MemberService {
         MyRewardRes myRewardRes = new MyRewardRes(member.getNowReward(), member.getTotalReward());
         return myRewardRes;
     }
+
+
+    /**
+     * 회원가입
+     */
+    public Long signInMember(MemberSignReq memberSignReq) {
+        // 중복유저
+        if(memberRepository.existsMemberByUserId(memberSignReq.getUserId())){
+            return (long) -1;
+        }
+
+        Member signInUser = Member.builder()
+                .userId(memberSignReq.getUserId())
+                .password(memberSignReq.getPassword())
+                .nowReward(0L)
+                .totalReward(0L)
+                .build();
+
+        memberRepository.save(signInUser);
+        return signInUser.getId();
+    }
+
+    /**
+     * 로그인
+     */
+    public MemberLoginRes login(MemberLoginReq memberLoginReq){
+
+        Member user = memberRepository.findAllByUserId(memberLoginReq.getUserId());
+
+        if(user==null)
+            throw new BusinessException(ErrorMessage.USER_NOT_FOUND);
+
+        if(!Objects.equals(user.getPassword(), memberLoginReq.getPassword()))
+            throw new BusinessException(ErrorMessage.WRONG_PASSWORD);
+
+        MemberLoginRes memberLoginRes = new MemberLoginRes(user.getId());
+
+        return memberLoginRes;
+    }
+
 }
