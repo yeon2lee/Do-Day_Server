@@ -16,6 +16,9 @@ public class ReportDetailRes {
     @Schema(description = "신고 아이디" , example = "1")
     private Long reportId;
 
+    @Schema(description = "신고한 사람 아이디" , example = "1")
+    private Long reportUserId;
+
     @Schema(description = "신고 위도" , example = "37.5460")
     private Double latitude;
 
