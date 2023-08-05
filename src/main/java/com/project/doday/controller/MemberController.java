@@ -2,11 +2,13 @@ package com.project.doday.controller;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.doday.dto.*;
+import com.project.doday.exception.BusinessException;
 import com.project.doday.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -71,8 +73,14 @@ public class MemberController {
     @Operation(summary = "로그인 API", description = "로그인 시 사용되는 API입니다.")
     @PostMapping("/login")
     public BaseResponseDto<MemberLoginRes> login(@RequestBody MemberLoginReq memberLoginReq){
-        MemberLoginRes memberLoginRes = memberService.login(memberLoginReq);
-        return new BaseResponseDto<>(memberLoginRes);
+        try{
+            MemberLoginRes memberLoginRes = memberService.login(memberLoginReq);
+            return new BaseResponseDto<>(memberLoginRes);
+
+        } catch (BusinessException exception) {
+        return new BaseResponseDto<>((exception.getErrorMessage()));
+    }
+
     }
 
 

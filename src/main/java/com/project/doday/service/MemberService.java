@@ -5,6 +5,7 @@ import com.project.doday.dto.*;
 import com.project.doday.exception.BusinessException;
 import com.project.doday.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,7 @@ public class MemberService {
     private final ReportRepository reportRepository;
     private final MemberRepository memberRepository;
     private final ReportRejectRepository reportRejectRepository;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * 나의 해결 목록 보기
@@ -97,9 +99,10 @@ public class MemberService {
             return (long) -1;
         }
 
+        String pwd = passwordEncoder.encode(memberSignReq.getPassword());
         Member signInUser = Member.builder()
                 .userId(memberSignReq.getUserId())
-                .password(memberSignReq.getPassword())
+                .password(pwd)
                 .nowReward(0L)
                 .totalReward(0L)
                 .build();
@@ -118,12 +121,12 @@ public class MemberService {
         if(user==null)
             throw new BusinessException(ErrorMessage.USER_NOT_FOUND);
 
-        if(!Objects.equals(user.getPassword(), memberLoginReq.getPassword()))
+        if(!passwordEncoder.matches(memberLoginReq.getPassword(), user.getPassword())){
             throw new BusinessException(ErrorMessage.WRONG_PASSWORD);
+        }
 
-        MemberLoginRes memberLoginRes = new MemberLoginRes(user.getId());
-
-        return memberLoginRes;
+        return new MemberLoginRes(user.getId());
     }
+
 
 }
