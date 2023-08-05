@@ -6,9 +6,12 @@ import com.project.doday.dto.ReportFindAllRes;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ReportRepository extends JpaRepository<Report, Long> {
 
     ArrayList<Report> findAllByStateOrderByCreatedDateDesc(ReportState state);
+
+    List<Report> findAllByMemberIdOrderByCreatedDateDesc(Long memberId);
 
 }
