@@ -26,10 +26,12 @@
 </table>
 
 ## 🦺 Project Architecture
-<img width="1416" alt="image" src="https://github.com/do-day/Do-Day_Server/assets/101448999/e8a4212b-af19-4505-87f4-68576c88de20">
+<img width="1289" alt="image" src="https://github-production-user-asset-6210df.s3.amazonaws.com/101448999/258711156-6121d36d-295a-42d7-9c5a-bc789d544821.png">
+
 
 ## 🦺 Project ERD
-![image](https://github.com/do-day/Do-Day_Server/assets/101448999/cc3a9976-2bef-4fe3-b258-e6599fe25aaf)
+<img width="1289" alt="image" src="https://github-production-user-asset-6210df.s3.amazonaws.com/101448999/258711353-d213818c-e23d-4dcf-a525-ab9cc25901f0.png">
+
 
 ## 🦺 Project Duration 
 - 2023-07-17 ~ 2023-08-06
