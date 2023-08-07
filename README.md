@@ -4,6 +4,7 @@
 
 ## 🦺 Introduce
 > **DoDay** : **리워드 기반 시민 참여형 빗물받이 신고 서비스**
+> 
 🌐 [결과물 배포](https://doday-nu.vercel.app/ "https://doday-nu.vercel.app/")
 📱[시연 영상](https://www.youtube.com/watch?v=qPtUxfTgUfg)
 📢 [발표 자료](https://file.notion.so/f/s/acf55604-f8ab-40c2-b1bb-1f3901272c03/%E1%84%83%E1%85%AE%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5_%E1%84%87%E1%85%A1%E1%86%AF%E1%84%91%E1%85%AD%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD.pdf?id=adddf7f8-cb8a-432a-8706-673ca7b95c91&table=block&spaceId=d6757213-e253-4503-a0ea-e5fa5e736a05&expirationTimestamp=1691474400000&signature=EnyCaDSMCyrZCou4CoBhRIC4xBDU7frehQlWyWI6Ru4&downloadName=%E1%84%83%E1%85%AE%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5_%E1%84%87%E1%85%A1%E1%86%AF%E1%84%91%E1%85%AD%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD.pdf)
