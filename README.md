@@ -1,6 +1,16 @@
-# 🦺 내일 말고 오늘, 안전한 서울 만들기! DoDay
 
-2023 서울우먼해커톤 안전한 도시 1팀 두데이 서버 레포지토리입니다.
+<h2 align="center">
+  🦺 내일 말고 오늘, 안전한 서울 만들기! DoDay
+  <br>
+  <br>
+  <img src="https://github.com/do-day/frontend/assets/72433681/27eaad5f-04d0-4775-aa99-a8d96d3d256a" alt="두데이" width="200">
+  
+  
+</h2>
+
+<p align="center">🏆 2023 서울 우먼테크 해커톤 최우수상(2등)</p>
+
+<p align="center">2023 서울우먼해커톤 안전한 도시 1팀 두데이 서버 레포지토리입니다.</p>
 
 ## 🦺 Introduce
 > **DoDay** : **리워드 기반 시민 참여형 빗물받이 신고 서비스**
@@ -9,10 +19,11 @@
 📱[시연 영상](https://www.youtube.com/watch?v=qPtUxfTgUfg)
 📢 [발표 자료](https://file.notion.so/f/s/acf55604-f8ab-40c2-b1bb-1f3901272c03/%E1%84%83%E1%85%AE%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5_%E1%84%87%E1%85%A1%E1%86%AF%E1%84%91%E1%85%AD%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD.pdf?id=adddf7f8-cb8a-432a-8706-673ca7b95c91&table=block&spaceId=d6757213-e253-4503-a0ea-e5fa5e736a05&expirationTimestamp=1691474400000&signature=EnyCaDSMCyrZCou4CoBhRIC4xBDU7frehQlWyWI6Ru4&downloadName=%E1%84%83%E1%85%AE%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5_%E1%84%87%E1%85%A1%E1%86%AF%E1%84%91%E1%85%AD%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD.pdf)
 
-
-<img width="1418" alt="image" src="https://github-production-user-asset-6210df.s3.amazonaws.com/101448999/258706798-b57e1bad-2b12-4fc0-87d5-f7b5ff2dd7e0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230807%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230807T053445Z&X-Amz-Expires=300&X-Amz-Signature=a3b829d51d6b6da87822ee68f2d4be33f0c8362390ccf93b4ec50cd4672b19de&X-Amz-SignedHeaders=host&actor_id=101448999&key_id=0&repo_id=669828066">
-<img width="1417" alt="image" src="https://github-production-user-asset-6210df.s3.amazonaws.com/101448999/258706934-0cfdcffb-7a71-4a27-89fe-1b5d1f9cd547.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230807%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230807T053501Z&X-Amz-Expires=300&X-Amz-Signature=e26cb75c0e22add0772705d51c4872d2e0e7c7e998a7f9842e6b8d9bdb3e368e&X-Amz-SignedHeaders=host&actor_id=101448999&key_id=0&repo_id=669828066">
-<img width="1416" alt="image" src="https://github-production-user-asset-6210df.s3.amazonaws.com/101448999/258707094-992e2861-1910-4424-92c8-6f9be7404cc3.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230807%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230807T053515Z&X-Amz-Expires=300&X-Amz-Signature=aaec864dc93931bf4794452722991d3f27a8d196406e8d5c921271230ee5163c&X-Amz-SignedHeaders=host&actor_id=101448999&key_id=0&repo_id=669828066">
+<p align="center">
+<img width="300" alt="image" src="https://github.com/do-day/frontend/assets/72433681/b2d927d6-0c48-4894-8b83-766e70e74662">
+<img width="300" alt="image" src="https://github.com/do-day/frontend/assets/72433681/3479e47b-f86a-47e6-a57f-55af34247df6">
+<img width="300" alt="image" src="https://github.com/do-day/frontend/assets/72433681/9f148e77-b517-4e30-89a0-a1c5fee75e12">
+</p>
 
 
 ## 🦺 Collaborator
@@ -26,6 +37,38 @@
    </tr>
 </table>
 
+## 🦺 Key Features
+
+### 신고
+
+- 신고하기: 현재 위치를 지도에서 선택, 빗물받이와 주변 건물 이미지 첨부, 위치 설명 작성
+- 신고 목록: 해결이 필요한 신고 목록
+- 신고 상세보기
+
+### 해결
+
+- 해결하기: 직접 해결하고 싶은 신고 상세보기에서 해결하기 신청
+- 보고하기: 해결을 완료하고 사진을 첨부하거나 허위 신고 보고
+
+### 회원
+
+- 회원가입
+- 로그인
+- 마이페이지
+  - 나의 신고 목록
+  - 나의 해결 목록
+  - 리워드 내역
+  - 리워드 전환하기
+
+### 관리자
+
+- 신고 목록
+- 신고 상세보기
+  - 신고 승인 및 반려
+- 해결 목록
+- 해결 상세보기
+  - 해결 승인 및 반려
+  
 ## 🦺 Project Architecture
 <img width="1289" alt="image" src="https://github-production-user-asset-6210df.s3.amazonaws.com/101448999/258711156-6121d36d-295a-42d7-9c5a-bc789d544821.png">
 
