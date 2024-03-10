@@ -33,7 +33,7 @@
 <table align="center" >
    <tr>
         <td align="center"><a href="https://github.com/ziiyouth"><img src="https://github.com/ziiyouth.png" width="100px;" alt=""/><br /><sub><b><br/>박지영</b></sub></a></td>
-<td align="center"><a href="https://github.com/yeon2lee"><img src="https://github.com/yeon2lee.png" width="100px;" alt=""/><br /><sub><b><br/>김나연</b></sub></a></td>
+<td align="center"><a href="https://github.com/yeon2lee"><img src="https://github.com/yeon2lee.png" width="100px;" alt=""/><br /><sub><b><br/>이나연</b></sub></a></td>
    </tr>
 </table>
 
